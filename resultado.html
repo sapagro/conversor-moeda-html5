@@ -10,12 +10,58 @@
 					location.href = "index.html";
 				}
 			}
+			
+			window.onload = function(){
+				chamarAPI();
+			}
+				
+			function chamarAPI(){
+				const endpoint = "https://api.exchangeratesapi.io/latest";
+				var request = new XMLHttpRequest();
+				request.addEventListener("load", respostaAPI);
+				request.open("GET", endpoint);
+				request.send();
+			}
+			
+			function respostaAPI(){
+				console.log(this);
+			}
+			
+			function respostaAPI(){
+				//console.log(this);
+				var oResposta = JSON.parse(this.responseText);
+				var url = new URL(location.href);
+				
+				var sMoedaOrigem = url.searchParams.get("origem");
+				var sMoedaDestino = url.searchParams.get("destino");
+				var fValor = oResposta.rates[sMoedaDestino];
+				
+				document.querySelector("#valor_destino").innerText = fValor;
+				document.querySelector("#moeda_destino").innerText = sMoedaDestino;
+				
+			}
 		</script>
 	</head>
 	
 	<body>
-		<h1>O resultado é...</h1>
-		
+		<h1>Resultado</h1>
+		<p>
+			1 EUR é igual a 
+			<span id="valor_destino">X</span> <span id="moeda_destino">BRL</span>
+		</p>
 		<button type="button" onclick="voltar()">Voltar</button>
 	</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
