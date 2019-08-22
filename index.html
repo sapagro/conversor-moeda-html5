@@ -24,9 +24,18 @@
 				<input type="text" class="form-control" id="moeda_destino" name="destino" required
     				   maxlength="3" value="BRL">
     		</div>	   
-    		   
-    		<!--<input type="submit" value="Converter">-->
-    		<!--xxCTRL;xx-->
+ 
+	 	    <script>
+				window.onload = function(){
+					pegarDataAtual();
+				}
+		    </script>
+	    
+			<div class="data_cotacao">
+				<label for="data_cotacao">Data da Cotação:</label>
+				<input type="date" class="form-control" id="data_cotacao" name="data" required>
+    		</div>
+ 
     		<button type="button" onclick="chamarAPI()" class="btn btn-primary">Converter</button>
 		</form>
 		
@@ -44,7 +53,7 @@
 		      </td>
 		      <td>
 		      	<span id="moeda_destino_celula"></span>
-		      </td>
+		      </td>->
 		    </tr>
 		  </tbody>
 		</table>
