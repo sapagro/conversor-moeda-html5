@@ -1,18 +1,22 @@
 function chamarAPI(){
 	console.log("Chamando API");
-	
-	var dataCotacao = $("#data_cotacao").val();
-	var sMoedaOrigem = $("#moeda_origem").val();
-	if(dataCotacao == ''){
-	  var endpoint1 = "https://api.exchangeratesapi.io/latest?base=";
-	  endpoint1 = endpoint1+sMoedaOrigem;
-	  $.get(endpoint1, callback);
-	} else {
-      //const endpoint2 = "https://api.exchangeratesapi.io/2010-01-12";
-      //https://api.exchangeratesapi.io/2010-01-12?base=USD
-	  var endpoint2 = 'https://api.exchangeratesapi.io/'+dataCotacao+'?base='+sMoedaOrigem;
-      $.get(endpoint2, callback);
-	}
+	const endpoint = "https://api.exchangeratesapi.io/latest";
+	var oParametros = {
+		base: $("#moeda_origem").val()
+	};
+	$.get(endpoint, oParametros, callback );
+	// var dataCotacao = $("#data_cotacao").val();
+	// var sMoedaOrigem = $("#moeda_origem").val();
+	// if(dataCotacao == ''){
+	//   var endpoint1 = "https://api.exchangeratesapi.io/latest?base=";
+	//   endpoint1 = endpoint1+sMoedaOrigem;
+	//   $.get(endpoint1, callback);
+	// } else {
+ //     //const endpoint2 = "https://api.exchangeratesapi.io/2010-01-12";
+ //     //https://api.exchangeratesapi.io/2010-01-12?base=USD
+	//   var endpoint2 = 'https://api.exchangeratesapi.io/'+dataCotacao+'?base='+sMoedaOrigem;
+ //     $.get(endpoint2, callback);
+	// }
 }
 
 function callback(resultado){
