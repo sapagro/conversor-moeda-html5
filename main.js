@@ -1,32 +1,48 @@
-function chamarAPI(){
-	console.log("Chamando API");
-	const endpoint = "https://api.exchangeratesapi.io/latest";
-	var oParametros = {
-		base: $("#moeda_origem").val()
-	};
-	$.get(endpoint, oParametros, callback );
-	// var dataCotacao = $("#data_cotacao").val();
-	// var sMoedaOrigem = $("#moeda_origem").val();
-	// if(dataCotacao == ''){
-	//   var endpoint1 = "https://api.exchangeratesapi.io/latest?base=";
-	//   endpoint1 = endpoint1+sMoedaOrigem;
-	//   $.get(endpoint1, callback);
-	// } else {
- //     //const endpoint2 = "https://api.exchangeratesapi.io/2010-01-12";
- //     //https://api.exchangeratesapi.io/2010-01-12?base=USD
-	//   var endpoint2 = 'https://api.exchangeratesapi.io/'+dataCotacao+'?base='+sMoedaOrigem;
- //     $.get(endpoint2, callback);
-	// }
+const ovly = { };
+
+ovly.conversor = {
+	versao: "1",
+	chamarAPI: function(){
+		console.log("Chamando API");
+		const endpoint = "api/latest";
+		var oParametros = {
+			base: $("#moeda_origem").val()
+		};
+		$.get(endpoint, oParametros, this.callback );
+	},
+	callback: function(resultado){
+		var sMoedaDestino = $("#moeda_destino").val();
+		var fValor = resultado.rates[sMoedaDestino];
+		
+		$("#valor_destino").text(fValor);
+		$("#moeda_destino_celula").text(sMoedaDestino);
+	}
 }
 
-function callback(resultado){
-	//console.log(resultado);
-	var sMoedaDestino = $("#moeda_destino").val();
-	var fValor = resultado.rates[sMoedaDestino];
+// function chamarAPI(){
+
+// 	// var dataCotacao = $("#data_cotacao").val();
+// 	// var sMoedaOrigem = $("#moeda_origem").val();
+// 	// if(dataCotacao == ''){
+// 	//   var endpoint1 = "https://api.exchangeratesapi.io/latest?base=";
+// 	//   endpoint1 = endpoint1+sMoedaOrigem;
+// 	//   $.get(endpoint1, callback);
+// 	// } else {
+//  //     //const endpoint2 = "https://api.exchangeratesapi.io/2010-01-12";
+//  //     //https://api.exchangeratesapi.io/2010-01-12?base=USD
+// 	//   var endpoint2 = 'https://api.exchangeratesapi.io/'+dataCotacao+'?base='+sMoedaOrigem;
+//  //     $.get(endpoint2, callback);
+// 	// }
+// }
+
+// function callback(resultado){
+// 	//console.log(resultado);
+// 	var sMoedaDestino = $("#moeda_destino").val();
+// 	var fValor = resultado.rates[sMoedaDestino];
 	
-	$("#valor_destino").text(fValor);
-	$("#moeda_destino_celula").text(sMoedaDestino);
-}
+// 	$("#valor_destino").text(fValor);
+// 	$("#moeda_destino_celula").text(sMoedaDestino);
+// }
 
 function pegarDataAtual(){
     var dataTela = $("#data_cotacao").val();
@@ -51,5 +67,5 @@ function pegarDataAtual(){
    //document.getElementById('data_cotacao').value = data.getFullYear()+'-'+data.getMonth()+'-'+data.getDay();
 }
 
-var abc = callback;
-var abc = callback();
+// var abc = callback;
+// var abc = callback();
